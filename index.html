@@ -371,6 +371,156 @@
   }
   .ig-btn-icon { font-size: 15px; }
 
+  /* ── GUIDE SECTION ── */
+  .guide-section {
+    margin: 36px 0 40px;
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .guide-header {
+    background: var(--ink);
+    padding: 22px 28px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .guide-header-icon { font-size: 28px; flex-shrink: 0; }
+  .guide-header-text {}
+  .guide-header-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 3px;
+  }
+  .guide-header-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.2;
+  }
+  .guide-header-title em {
+    color: var(--gold-light);
+    font-style: normal;
+  }
+  .guide-body {
+    padding: 8px 0 20px;
+    background: var(--paper);
+  }
+  .guide-block {
+    padding: 20px 28px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .guide-block:last-child { border-bottom: none; }
+  .guide-block-title {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--ink);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .guide-block-title .g-icon {
+    font-size: 16px;
+  }
+  .guide-items {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .guide-item {
+    display: flex;
+    gap: 10px;
+    font-size: 13.5px;
+    color: var(--ink2);
+    line-height: 1.65;
+    align-items: flex-start;
+  }
+  .guide-item-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+    margin-top: 8px;
+  }
+  .guide-step-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .guide-step {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    background: var(--paper2);
+    border: 1px solid var(--rule);
+    border-radius: 100px;
+    padding: 6px 14px;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .guide-step-arrow {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .guide-warn {
+    background: #fff8e8;
+    border: 1px solid #e8d090;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #7a5a10;
+    margin-top: 10px;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .guide-caution-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .guide-caution-item {
+    display: flex;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--red);
+    align-items: flex-start;
+    background: #fff3f3;
+    border: 1px solid #f0c0c0;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-weight: 500;
+  }
+  .guide-summary {
+    background: var(--ink);
+    margin: 0 28px;
+    border-radius: 10px;
+    padding: 16px 20px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .guide-summary-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .guide-summary-text {
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.9);
+    line-height: 1.7;
+  }
+  .guide-summary-text strong { color: var(--gold-light); }
+  .guide-divider {
+    height: 1px;
+    background: var(--rule);
+    margin: 4px 28px 20px;
+  }
+
   @media (max-width: 560px) {
     .intro { grid-template-columns: 1fr; }
     .card { grid-template-columns: 56px 1fr; gap: 14px; }
@@ -378,6 +528,11 @@
     .card-name { font-size: 18px; }
     .stats-row { flex-wrap: wrap; }
     .stat { min-width: 45%; border-bottom: 1px solid var(--rule); }
+    .guide-caution-items { grid-template-columns: 1fr; }
+    .guide-block { padding: 18px 20px; }
+    .guide-header { padding: 18px 20px; }
+    .guide-summary { margin: 0 20px; }
+    .guide-divider { margin: 4px 20px 20px; }
   }
 </style>
 </head>
@@ -418,6 +573,104 @@
     <div class="intro-stat">
       <div class="intro-stat-num">월 100만</div>
       <div class="intro-stat-label">목표 현금 흐름</div>
+    </div>
+  </div>
+
+  <!-- BEGINNER GUIDE SECTION -->
+  <div class="guide-section">
+    <div class="guide-header">
+      <div class="guide-header-icon">🇺🇸</div>
+      <div class="guide-header-text">
+        <div class="guide-header-label">Beginner's Guide</div>
+        <div class="guide-header-title">미국 배당주식 <em>초보 가이드</em></div>
+      </div>
+    </div>
+    <div class="guide-body">
+
+      <!-- 계좌 개설 -->
+      <div class="guide-block">
+        <div class="guide-block-title"><span class="g-icon">🏦</span> 계좌 개설하기</div>
+        <div class="guide-items">
+          <div class="guide-item"><div class="guide-item-dot"></div>국내 증권사 앱에서 <strong>해외주식 거래 계좌</strong>를 만들면 됩니다.</div>
+          <div class="guide-item"><div class="guide-item-dot"></div>준비물: 신분증 · 본인 명의 휴대폰 · 은행계좌 · 증권사 앱</div>
+          <div class="guide-item"><div class="guide-item-dot"></div>계좌 개설 후 <strong>해외주식 거래 신청</strong>까지 꼭 완료하세요!</div>
+        </div>
+      </div>
+
+      <!-- 증권사 고르는 기준 -->
+      <div class="guide-block">
+        <div class="guide-block-title"><span class="g-icon">🔍</span> 증권사 고르는 기준</div>
+        <div class="guide-items">
+          <div class="guide-item"><div class="guide-item-dot"></div>거래 수수료 — 낮을수록 유리</div>
+          <div class="guide-item"><div class="guide-item-dot"></div>환전 우대율 — 미국 주식은 달러 투자라 <strong>환전 수수료도 중요</strong></div>
+          <div class="guide-item"><div class="guide-item-dot"></div>앱 사용 편의성 · 배당금 확인 기능</div>
+          <div class="guide-item"><div class="guide-item-dot"></div>소수점 투자 가능 여부 — 초보자에게 유용</div>
+        </div>
+      </div>
+
+      <!-- 투자 순서 -->
+      <div class="guide-block">
+        <div class="guide-block-title"><span class="g-icon">📋</span> 투자하는 순서</div>
+        <div class="guide-step-row">
+          <div class="guide-step">💵 원화 입금</div>
+          <span class="guide-step-arrow">→</span>
+          <div class="guide-step">💱 달러 환전</div>
+          <span class="guide-step-arrow">→</span>
+          <div class="guide-step">📈 미국주식 매수</div>
+          <span class="guide-step-arrow">→</span>
+          <div class="guide-step">💰 배당금 확인</div>
+          <span class="guide-step-arrow">→</span>
+          <div class="guide-step">🔄 재투자 또는 보관</div>
+        </div>
+        <div class="guide-warn">💡 처음에는 큰돈보다 <strong>소액으로 구조를 익히는 것</strong>이 훨씬 좋습니다.</div>
+      </div>
+
+      <!-- 배당주 고를 때 -->
+      <div class="guide-block">
+        <div class="guide-block-title"><span class="g-icon">✅</span> 배당주 고를 때 기준</div>
+        <div class="guide-items">
+          <div class="guide-item"><div class="guide-item-dot"></div>배당을 꾸준히 줬는지 — 연속 배당 이력 확인</div>
+          <div class="guide-item"><div class="guide-item-dot"></div>배당금이 늘어나고 있는지 — 배당 성장률 체크</div>
+          <div class="guide-item"><div class="guide-item-dot"></div>회사 실적이 안정적인지 — 매출·이익 추세 확인</div>
+          <div class="guide-item"><div class="guide-item-dot"></div>주가가 과하게 빠진 건 아닌지 — 이유 있는 하락일 수 있음</div>
+          <div class="guide-item"><div class="guide-item-dot"></div>배당률이 비정상적으로 높지 않은지 — <strong>너무 높으면 오히려 위험 신호</strong></div>
+        </div>
+      </div>
+
+      <!-- 관리 방법 -->
+      <div class="guide-block">
+        <div class="guide-block-title"><span class="g-icon">🗂️</span> 관리 방법 (월 1회 체크)</div>
+        <div class="guide-items">
+          <div class="guide-item"><div class="guide-item-dot"></div>배당금 입금 여부 확인</div>
+          <div class="guide-item"><div class="guide-item-dot"></div>주가 변동 이유 파악</div>
+          <div class="guide-item"><div class="guide-item-dot"></div>회사 실적 · 배당 삭감 여부 확인</div>
+          <div class="guide-item"><div class="guide-item-dot"></div>환율 변화 체크</div>
+          <div class="guide-item"><div class="guide-item-dot"></div>배당금은 바로 쓰기보다 <strong>초반엔 재투자</strong>하면 복리 효과 극대화</div>
+        </div>
+      </div>
+
+      <!-- 초보자 실수 -->
+      <div class="guide-block">
+        <div class="guide-block-title"><span class="g-icon">🚫</span> 초보자가 피해야 할 실수</div>
+        <div class="guide-caution-items">
+          <div class="guide-caution-item">❌ 배당률만 보고 사기</div>
+          <div class="guide-caution-item">❌ 한 종목에 몰빵하기</div>
+          <div class="guide-caution-item">❌ 환율 무시하기</div>
+          <div class="guide-caution-item">❌ 세금 생각 안 하기</div>
+          <div class="guide-caution-item">❌ 단기 수익만 기대하기</div>
+        </div>
+      </div>
+
+      <!-- 한 줄 요약 -->
+      <div class="guide-divider"></div>
+      <div class="guide-summary">
+        <div class="guide-summary-icon">⚡</div>
+        <div class="guide-summary-text">
+          <strong>한 줄 요약:</strong> 계좌 개설 → 환전 → 매수 → 배당 확인 → 재투자 → 관리 순서로 시작하세요.<br>
+          처음엔 소액으로 시작하고, <strong>배당률보다 꾸준함과 안정성</strong>을 먼저 보세요.
+        </div>
+      </div>
+
     </div>
   </div>
 
