@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>월 100만원 배당주 TOP 5</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
@@ -16,814 +16,548 @@
     --green: #1a6b3c;
     --green-light: #e8f5ee;
     --red: #8b1a1a;
+    --red-light: #fff3f3;
     --accent: #c8a84b;
     --rule: #d4c9a8;
     --muted: #7a7060;
+    --radius: 14px;
+    --px: 16px;
   }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
   body {
     background: var(--paper);
     color: var(--ink);
     font-family: 'Pretendard', sans-serif;
-    min-height: 100vh;
-  }
-
-  /* PAPER TEXTURE */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .page { max-width: 780px; margin: 0 auto; padding: 0 24px 80px; position: relative; z-index: 1; }
-
-  /* ── MASTHEAD ── */
-  .masthead {
-    border-top: 5px double var(--ink);
-    border-bottom: 1px solid var(--ink);
-    padding: 28px 0 16px;
-    margin-bottom: 0;
-    text-align: center;
-  }
-  .masthead-eyebrow {
-    font-family: 'Pretendard', sans-serif;
-    font-size: 10px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 14px;
-  }
-  .masthead h1 {
-    font-family: 'Pretendard', sans-serif;
-    font-size: clamp(32px, 7vw, 62px);
-    font-weight: 900;
-    line-height: 1.05;
-    letter-spacing: -1px;
-    color: var(--ink);
-    margin-bottom: 12px;
-  }
-  .masthead h1 em {
-    font-style: italic;
-    color: var(--gold);
-  }
-  .masthead-sub {
-    font-size: 13px;
-    color: var(--muted);
-    border-top: 1px solid var(--rule);
-    padding-top: 12px;
-    margin-top: 4px;
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    flex-wrap: wrap;
-  }
-  .masthead-sub span { display: flex; align-items: center; gap: 5px; }
-
-  /* ── INTRO ── */
-  .intro {
-    padding: 22px 0;
-    border-bottom: 1px solid var(--rule);
-    margin-bottom: 32px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    align-items: center;
-  }
-  .intro-text {
     font-size: 15px;
-    line-height: 1.8;
-    color: var(--ink2);
-  }
-  .intro-stat {
-    background: var(--ink);
-    color: var(--paper);
-    border-radius: 4px;
-    padding: 22px 24px;
-    text-align: center;
-  }
-  .intro-stat-num {
-    font-family: 'Pretendard', sans-serif;
-    font-size: 42px;
-    font-weight: 700;
-    color: var(--gold-light);
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-  .intro-stat-label { font-size: 12px; color: #aaa; letter-spacing: 1px; }
-
-  /* ── CARDS ── */
-  .cards { display: flex; flex-direction: column; gap: 0; }
-
-  .card {
-    border-bottom: 1px solid var(--rule);
-    padding: 32px 0;
-    display: grid;
-    grid-template-columns: 80px 1fr;
-    gap: 24px;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeUp 0.5s forwards;
-  }
-  .card:nth-child(1) { animation-delay: 0.1s; }
-  .card:nth-child(2) { animation-delay: 0.2s; }
-  .card:nth-child(3) { animation-delay: 0.3s; }
-  .card:nth-child(4) { animation-delay: 0.4s; }
-  .card:nth-child(5) { animation-delay: 0.5s; }
-
-  @keyframes fadeUp {
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* RANK */
-  .card-rank {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding-top: 4px;
-  }
-  .rank-num {
-    font-family: 'Pretendard', sans-serif;
-    font-size: 52px;
-    font-weight: 900;
-    line-height: 1;
-    color: var(--rule);
-    letter-spacing: -2px;
-  }
-  .rank-emoji { font-size: 22px; margin-top: 8px; }
-
-  /* BODY */
-  .card-body {}
-  .card-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 4px;
-    flex-wrap: wrap;
-  }
-  .card-ticker {
-    font-family: 'Pretendard', sans-serif;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    color: var(--muted);
-    margin-bottom: 2px;
-  }
-  .card-name {
-    font-family: 'Pretendard', sans-serif;
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--ink);
-    line-height: 1.2;
-  }
-  .card-type {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    padding: 4px 10px;
-    border-radius: 2px;
-    white-space: nowrap;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-  .type-king {
-    background: var(--gold);
-    color: #fff;
-  }
-  .type-champ {
-    background: var(--green);
-    color: #fff;
-  }
-  .type-etf {
-    background: var(--ink);
-    color: #fff;
-  }
-  .type-growth {
-    background: var(--red);
-    color: #fff;
-  }
-
-  .card-desc {
-    font-size: 13px;
-    color: var(--muted);
-    margin-bottom: 16px;
-    margin-top: 2px;
-  }
-
-  /* STATS ROW */
-  .stats-row {
-    display: flex;
-    gap: 0;
-    border: 1px solid var(--rule);
-    border-radius: 4px;
-    overflow: hidden;
-    margin-bottom: 14px;
-  }
-  .stat {
-    flex: 1;
-    padding: 10px 14px;
-    border-right: 1px solid var(--rule);
-    background: var(--paper2);
-  }
-  .stat:last-child { border-right: none; }
-  .stat-label {
-    font-size: 9px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 3px;
-    font-family: 'Pretendard', sans-serif;
-  }
-  .stat-val {
-    font-family: 'Pretendard', sans-serif;
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--green);
-  }
-  .stat-val.neutral { color: var(--ink2); }
-
-  /* BULLETS */
-  .bullets { display: flex; flex-direction: column; gap: 5px; margin-bottom: 14px; }
-  .bullet {
-    display: flex;
-    gap: 8px;
-    font-size: 13px;
-    color: var(--ink2);
-    align-items: flex-start;
-  }
-  .bullet::before {
-    content: '—';
-    color: var(--accent);
-    font-weight: 700;
-    flex-shrink: 0;
-    font-family: 'Pretendard', sans-serif;
-  }
-
-  /* INSIGHT */
-  .insight {
-    background: var(--green-light);
-    border-left: 3px solid var(--green);
-    padding: 10px 14px;
-    border-radius: 0 4px 4px 0;
-    font-size: 13px;
-    color: var(--green);
     line-height: 1.6;
-  }
-  .insight strong { color: var(--green); }
-
-  /* ── FOOTER NOTE ── */
-  .footer-note {
-    margin-top: 40px;
-    border-top: 1px solid var(--rule);
-    padding-top: 20px;
-  }
-  .footer-note-title {
-    font-family: 'Pretendard', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .footer-items { display: flex; flex-direction: column; gap: 8px; }
-  .footer-item {
-    display: flex;
-    gap: 8px;
-    font-size: 13px;
-    color: var(--ink2);
-    line-height: 1.6;
-  }
-  .footer-item::before {
-    content: '※';
-    color: var(--red);
-    flex-shrink: 0;
-    font-weight: 700;
+    -webkit-font-smoothing: antialiased;
   }
 
-  .bottom-rule {
-    margin-top: 40px;
-    text-align: center;
-    font-family: 'Pretendard', sans-serif;
-    font-size: 10px;
-    color: var(--rule);
-    letter-spacing: 3px;
+  .page {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 var(--px) 60px;
   }
-  .bottom-rule::before { content: '— '; }
-  .bottom-rule::after { content: ' —'; }
 
-  /* ── INSTAGRAM BANNER ── */
+  /* ── IG BANNER ── */
   .ig-banner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
-    background: linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);
-    border-radius: 12px;
-    padding: 18px 24px;
-    margin: 20px 0;
-    flex-wrap: wrap;
+    gap: 12px;
+    background: linear-gradient(135deg, #833ab4 0%, #fd1d1d 55%, #fcb045 100%);
+    padding: 14px var(--px);
+    text-decoration: none;
   }
-  .ig-banner-top { margin-bottom: 28px; }
-  .ig-banner-bottom { margin-top: 8px; margin-bottom: 0; }
-  .ig-banner-left { display: flex; align-items: center; gap: 14px; }
-  .ig-banner-icon { font-size: 30px; flex-shrink: 0; }
-  .ig-banner-text { color: #fff; }
-  .ig-banner-label {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    opacity: 0.85;
-    margin-bottom: 3px;
-    text-transform: uppercase;
-  }
-  .ig-banner-title {
-    font-size: 16px;
-    font-weight: 800;
-    line-height: 1.3;
-  }
+  .ig-banner-top { border-radius: 0 0 var(--radius) var(--radius); margin-bottom: 20px; }
+  .ig-banner-bottom { border-radius: var(--radius); margin-top: 24px; }
+  .ig-left { display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .ig-icon { font-size: 22px; flex-shrink: 0; }
+  .ig-label { font-size: 10px; color: rgba(255,255,255,0.7); letter-spacing: 1px; margin-bottom: 1px; }
+  .ig-title { font-size: 13px; font-weight: 700; color: #fff; line-height: 1.35; }
   .ig-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
     background: #fff;
     color: #c13584;
     font-family: 'Pretendard', sans-serif;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 800;
-    text-decoration: none;
-    padding: 11px 20px;
+    padding: 8px 14px;
     border-radius: 100px;
     white-space: nowrap;
-    transition: transform 0.15s, box-shadow 0.15s;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 5px;
   }
-  .ig-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+
+  /* ── MASTHEAD ── */
+  .masthead {
+    border-top: 4px double var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding: 22px 0 14px;
+    text-align: center;
+    margin-bottom: 20px;
   }
-  .ig-btn-icon { font-size: 15px; }
+  .masthead-eyebrow {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .masthead h1 {
+    font-size: clamp(26px, 8vw, 48px);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .masthead h1 em { font-style: normal; color: var(--gold); }
+  .masthead-tags {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    border-top: 1px solid var(--rule);
+    padding-top: 12px;
+  }
+  .masthead-tag {
+    font-size: 11px;
+    color: var(--muted);
+    background: var(--paper2);
+    border: 1px solid var(--rule);
+    border-radius: 100px;
+    padding: 3px 10px;
+  }
+
+  /* ── INTRO STAT ── */
+  .intro-stat {
+    background: var(--ink);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    gap: 12px;
+  }
+  .intro-stat-text { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.5; }
+  .intro-stat-text strong { color: #fff; }
+  .intro-stat-right { text-align: right; flex-shrink: 0; }
+  .intro-stat-num { font-size: 30px; font-weight: 900; color: var(--gold-light); line-height: 1; }
+  .intro-stat-sub { font-size: 10px; color: rgba(255,255,255,0.4); margin-top: 3px; }
+
+  /* ── SECTION LABEL ── */
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
 
   /* ── GUIDE SECTION ── */
   .guide-section {
-    margin: 36px 0 40px;
     border: 1px solid var(--rule);
-    border-radius: 14px;
+    border-radius: var(--radius);
     overflow: hidden;
+    margin-bottom: 32px;
   }
   .guide-header {
     background: var(--ink);
-    padding: 22px 28px;
+    padding: 18px var(--px);
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 12px;
   }
-  .guide-header-icon { font-size: 28px; flex-shrink: 0; }
-  .guide-header-text {}
-  .guide-header-label {
-    font-size: 10px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.45);
-    margin-bottom: 3px;
-  }
-  .guide-header-title {
-    font-size: 20px;
-    font-weight: 800;
-    color: #fff;
-    line-height: 1.2;
-  }
-  .guide-header-title em {
-    color: var(--gold-light);
-    font-style: normal;
-  }
-  .guide-body {
-    padding: 8px 0 20px;
-    background: var(--paper);
-  }
+  .guide-header-icon { font-size: 26px; flex-shrink: 0; }
+  .guide-header-eyebrow { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 2px; }
+  .guide-header-title { font-size: 18px; font-weight: 800; color: #fff; line-height: 1.2; }
+  .guide-header-title em { color: var(--gold-light); font-style: normal; }
+
   .guide-block {
-    padding: 20px 28px;
+    padding: 18px var(--px);
     border-bottom: 1px solid var(--rule);
+    background: var(--paper);
   }
   .guide-block:last-child { border-bottom: none; }
   .guide-block-title {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 800;
     color: var(--ink);
     margin-bottom: 12px;
     display: flex;
     align-items: center;
-    gap: 7px;
+    gap: 6px;
   }
-  .guide-block-title .g-icon {
-    font-size: 16px;
-  }
-  .guide-items {
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-  }
+  .guide-items { display: flex; flex-direction: column; gap: 8px; }
   .guide-item {
-    display: flex;
-    gap: 10px;
-    font-size: 13.5px;
-    color: var(--ink2);
-    line-height: 1.65;
-    align-items: flex-start;
+    display: flex; gap: 10px; font-size: 14px; color: var(--ink2);
+    line-height: 1.6; align-items: flex-start;
   }
-  .guide-item-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
-    flex-shrink: 0;
-    margin-top: 8px;
-  }
-  .guide-step-row {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-  .guide-step {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 13px;
-    font-weight: 700;
-    background: var(--paper2);
-    border: 1px solid var(--rule);
-    border-radius: 100px;
-    padding: 6px 14px;
-    color: var(--ink);
-    white-space: nowrap;
-  }
-  .guide-step-arrow {
-    color: var(--accent);
-    font-weight: 700;
-    font-size: 14px;
-  }
-  .guide-warn {
-    background: #fff8e8;
-    border: 1px solid #e8d090;
-    border-radius: 8px;
-    padding: 10px 14px;
-    font-size: 13px;
-    color: #7a5a10;
-    margin-top: 10px;
-    display: flex;
-    gap: 8px;
-    align-items: flex-start;
-  }
-  .guide-caution-items {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-  }
-  .guide-caution-item {
-    display: flex;
-    gap: 8px;
-    font-size: 13px;
-    color: var(--red);
-    align-items: flex-start;
-    background: #fff3f3;
-    border: 1px solid #f0c0c0;
-    border-radius: 8px;
-    padding: 10px 12px;
-    font-weight: 500;
-  }
-  .guide-summary {
-    background: var(--ink);
-    margin: 0 28px;
-    border-radius: 10px;
-    padding: 16px 20px;
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-  }
-  .guide-summary-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
-  .guide-summary-text {
-    font-size: 13.5px;
-    color: rgba(255,255,255,0.9);
-    line-height: 1.7;
-  }
-  .guide-summary-text strong { color: var(--gold-light); }
-  .guide-divider {
-    height: 1px;
-    background: var(--rule);
-    margin: 4px 28px 20px;
+  .guide-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent); flex-shrink: 0; margin-top: 8px;
   }
 
-  @media (max-width: 560px) {
-    .intro { grid-template-columns: 1fr; }
-    .card { grid-template-columns: 56px 1fr; gap: 14px; }
-    .rank-num { font-size: 38px; }
-    .card-name { font-size: 18px; }
-    .stats-row { flex-wrap: wrap; }
-    .stat { min-width: 45%; border-bottom: 1px solid var(--rule); }
-    .guide-caution-items { grid-template-columns: 1fr; }
-    .guide-block { padding: 18px 20px; }
-    .guide-header { padding: 18px 20px; }
-    .guide-summary { margin: 0 20px; }
-    .guide-divider { margin: 4px 20px 20px; }
+  /* 투자 순서 */
+  .guide-steps { display: flex; flex-direction: column; gap: 7px; margin-bottom: 12px; }
+  .guide-step {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--paper2); border: 1px solid var(--rule);
+    border-radius: 10px; padding: 11px 14px;
+  }
+  .step-num {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--ink); color: #fff;
+    font-size: 11px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .step-text { font-size: 14px; font-weight: 600; color: var(--ink); flex: 1; }
+  .step-emoji { font-size: 18px; }
+
+  .guide-warn {
+    background: #fff8e8; border: 1px solid #e8d090; border-radius: 10px;
+    padding: 11px 14px; font-size: 13px; color: #7a5a10;
+    display: flex; gap: 8px; align-items: flex-start; margin-top: 10px;
+  }
+
+  /* 피해야 할 실수 */
+  .caution-grid { display: flex; flex-direction: column; gap: 7px; }
+  .caution-item {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--red-light); border: 1px solid #f0c0c0;
+    border-radius: 10px; padding: 11px 14px;
+    font-size: 14px; font-weight: 600; color: var(--red);
+  }
+
+  /* 한 줄 요약 */
+  .guide-divider { height: 1px; background: var(--rule); margin: 0 var(--px) 16px; }
+  .guide-summary {
+    background: var(--ink); margin: 0 var(--px) var(--px);
+    border-radius: 10px; padding: 14px 16px;
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+  .guide-summary-text { font-size: 13.5px; color: rgba(255,255,255,0.88); line-height: 1.7; }
+  .guide-summary-text strong { color: var(--gold-light); }
+
+  /* ── STOCK CARDS ── */
+  .cards { display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px; }
+  .card {
+    background: #fff; border: 1px solid var(--rule);
+    border-radius: var(--radius); overflow: hidden;
+    opacity: 0; transform: translateY(16px);
+    animation: fadeUp 0.45s forwards;
+  }
+  .card:nth-child(1) { animation-delay: 0.05s; }
+  .card:nth-child(2) { animation-delay: 0.12s; }
+  .card:nth-child(3) { animation-delay: 0.19s; }
+  .card:nth-child(4) { animation-delay: 0.26s; }
+  .card:nth-child(5) { animation-delay: 0.33s; }
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+  .card-top {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 16px 10px; border-bottom: 1px solid var(--rule);
+    background: var(--paper2); gap: 8px;
+  }
+  .card-top-left { display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .card-num { font-size: 26px; font-weight: 900; color: var(--rule); line-height: 1; letter-spacing: -1px; flex-shrink: 0; }
+  .card-emoji-wrap { font-size: 22px; flex-shrink: 0; }
+  .card-ticker { font-size: 10px; letter-spacing: 1.5px; color: var(--muted); margin-bottom: 1px; }
+  .card-name { font-size: 16px; font-weight: 800; color: var(--ink); line-height: 1.2; }
+  .card-badge {
+    font-size: 10px; font-weight: 700; padding: 4px 9px;
+    border-radius: 100px; white-space: nowrap; flex-shrink: 0;
+  }
+  .badge-king { background: var(--gold); color: #fff; }
+  .badge-champ { background: var(--green); color: #fff; }
+  .badge-etf { background: var(--ink); color: #fff; }
+  .badge-high { background: var(--red); color: #fff; }
+
+  .card-body { padding: 14px 16px; }
+  .card-desc { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+
+  .stats-row {
+    display: flex; border: 1px solid var(--rule);
+    border-radius: 10px; overflow: hidden; margin-bottom: 12px;
+  }
+  .stat { flex: 1; padding: 9px 10px; border-right: 1px solid var(--rule); background: var(--paper2); }
+  .stat:last-child { border-right: none; }
+  .stat-label { font-size: 9px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+  .stat-val { font-size: 14px; font-weight: 700; color: var(--green); }
+  .stat-val.n { color: var(--ink2); font-size: 12px; }
+
+  .bullets { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+  .bullet {
+    display: flex; gap: 8px; font-size: 13.5px; color: var(--ink2);
+    align-items: flex-start; line-height: 1.55;
+  }
+  .bullet::before { content: '—'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+
+  .insight {
+    background: var(--green-light); border-left: 3px solid var(--green);
+    padding: 10px 13px; border-radius: 0 8px 8px 0;
+    font-size: 13px; color: var(--green); line-height: 1.6;
+  }
+
+  /* ── FOOTER ── */
+  .footer-note {
+    border: 1px solid #e8d090; border-radius: var(--radius);
+    padding: 16px var(--px); background: #fffdf0; margin-bottom: 20px;
+  }
+  .footer-note-title { font-size: 13px; font-weight: 800; margin-bottom: 10px; color: #7a5a10; }
+  .footer-items { display: flex; flex-direction: column; gap: 8px; }
+  .footer-item {
+    display: flex; gap: 8px; font-size: 12.5px; color: #7a5a10; line-height: 1.55;
+  }
+  .footer-item::before { content: '※'; flex-shrink: 0; font-weight: 700; }
+
+  .bottom-rule {
+    text-align: center; font-size: 9px;
+    letter-spacing: 3px; color: var(--rule); margin-bottom: 4px;
+  }
+
+  /* ── DESKTOP (600px+) ── */
+  @media (min-width: 600px) {
+    :root { --px: 24px; }
+    .masthead h1 { font-size: 52px; }
+    .caution-grid { display: grid; grid-template-columns: 1fr 1fr; }
+    .guide-steps { flex-direction: row; flex-wrap: wrap; gap: 8px; }
+    .guide-step { flex: 1; min-width: 120px; flex-direction: column; align-items: flex-start; gap: 6px; padding: 12px 14px; }
   }
 </style>
 </head>
 <body>
 <div class="page">
 
-  <!-- IG BANNER TOP -->
-  <a href="https://www.instagram.com/startup_tip_" target="_blank" style="text-decoration:none;">
-    <div class="ig-banner ig-banner-top">
-      <div class="ig-banner-left">
-        <div class="ig-banner-icon">📲</div>
-        <div class="ig-banner-text">
-          <div class="ig-banner-label">Follow Us</div>
-          <div class="ig-banner-title">더 많은 꿀정보 얻고 싶다면?<br>인스타그램에서 만나요!</div>
-        </div>
+  <!-- IG 배너 상단 -->
+  <a href="https://www.instagram.com/startup_tip_" target="_blank" class="ig-banner ig-banner-top">
+    <div class="ig-left">
+      <div class="ig-icon">📲</div>
+      <div>
+        <div class="ig-label">Follow Us</div>
+        <div class="ig-title">더 많은 꿀정보 얻고 싶다면?<br>인스타그램에서 만나요!</div>
       </div>
-      <div class="ig-btn"><span class="ig-btn-icon">📸</span> @startup_tip_ 바로가기</div>
     </div>
+    <div class="ig-btn">📸 팔로우</div>
   </a>
 
-  <!-- MASTHEAD -->
+  <!-- 타이틀 -->
   <div class="masthead">
     <div class="masthead-eyebrow">배당 투자 가이드 · 2026</div>
     <h1>월 <em>100만원</em>이<br>들어오는 배당주</h1>
-    <div class="masthead-sub">
-      <span>📊 안정형 배당주 TOP 5</span>
-      <span>🇺🇸 미국 주식 기준</span>
-      <span>💡 장기 투자 관점</span>
+    <div class="masthead-tags">
+      <span class="masthead-tag">📊 안정형 TOP 5</span>
+      <span class="masthead-tag">🇺🇸 미국 주식</span>
+      <span class="masthead-tag">💡 장기 투자</span>
     </div>
   </div>
 
-  <!-- INTRO -->
-  <div class="intro">
-    <div class="intro-text">
-      배당주 투자의 핵심은 <strong>꾸준함</strong>입니다.<br>
-      수십 년간 배당을 인상해온 기업들은 경기 침체에도 흔들리지 않는 비즈니스 모델을 가지고 있습니다. 아래 다섯 종목은 초보 투자자부터 전문가까지 가장 많이 언급하는 안정형 배당주입니다.
+  <!-- 인트로 -->
+  <div class="intro-stat">
+    <div class="intro-stat-text">
+      <strong>주가 상승 + 달러 배당금</strong>을<br>동시에 기대할 수 있는 투자
     </div>
-    <div class="intro-stat">
+    <div class="intro-stat-right">
       <div class="intro-stat-num">월 100만</div>
-      <div class="intro-stat-label">목표 현금 흐름</div>
+      <div class="intro-stat-sub">목표 현금 흐름</div>
     </div>
   </div>
 
-  <!-- BEGINNER GUIDE SECTION -->
+  <!-- ═══════════════
+       초보 가이드
+  ═══════════════ -->
+  <div class="section-label">초보 가이드</div>
   <div class="guide-section">
     <div class="guide-header">
       <div class="guide-header-icon">🇺🇸</div>
-      <div class="guide-header-text">
-        <div class="guide-header-label">Beginner's Guide</div>
+      <div>
+        <div class="guide-header-eyebrow">Beginner's Guide</div>
         <div class="guide-header-title">미국 배당주식 <em>초보 가이드</em></div>
       </div>
     </div>
-    <div class="guide-body">
 
-      <!-- 계좌 개설 -->
-      <div class="guide-block">
-        <div class="guide-block-title"><span class="g-icon">🏦</span> 계좌 개설하기</div>
-        <div class="guide-items">
-          <div class="guide-item"><div class="guide-item-dot"></div>국내 증권사 앱에서 <strong>해외주식 거래 계좌</strong>를 만들면 됩니다.</div>
-          <div class="guide-item"><div class="guide-item-dot"></div>준비물: 신분증 · 본인 명의 휴대폰 · 은행계좌 · 증권사 앱</div>
-          <div class="guide-item"><div class="guide-item-dot"></div>계좌 개설 후 <strong>해외주식 거래 신청</strong>까지 꼭 완료하세요!</div>
-        </div>
+    <div class="guide-block">
+      <div class="guide-block-title">🏦 계좌 개설하기</div>
+      <div class="guide-items">
+        <div class="guide-item"><div class="guide-dot"></div>국내 증권사 앱에서 <strong>해외주식 거래 계좌</strong>를 만들면 됩니다.</div>
+        <div class="guide-item"><div class="guide-dot"></div>준비물 → 신분증 · 본인 명의 휴대폰 · 은행계좌 · 증권사 앱</div>
+        <div class="guide-item"><div class="guide-dot"></div>계좌 개설 후 <strong>해외주식 거래 신청</strong>까지 꼭 완료하세요!</div>
       </div>
-
-      <!-- 증권사 고르는 기준 -->
-      <div class="guide-block">
-        <div class="guide-block-title"><span class="g-icon">🔍</span> 증권사 고르는 기준</div>
-        <div class="guide-items">
-          <div class="guide-item"><div class="guide-item-dot"></div>거래 수수료 — 낮을수록 유리</div>
-          <div class="guide-item"><div class="guide-item-dot"></div>환전 우대율 — 미국 주식은 달러 투자라 <strong>환전 수수료도 중요</strong></div>
-          <div class="guide-item"><div class="guide-item-dot"></div>앱 사용 편의성 · 배당금 확인 기능</div>
-          <div class="guide-item"><div class="guide-item-dot"></div>소수점 투자 가능 여부 — 초보자에게 유용</div>
-        </div>
-      </div>
-
-      <!-- 투자 순서 -->
-      <div class="guide-block">
-        <div class="guide-block-title"><span class="g-icon">📋</span> 투자하는 순서</div>
-        <div class="guide-step-row">
-          <div class="guide-step">💵 원화 입금</div>
-          <span class="guide-step-arrow">→</span>
-          <div class="guide-step">💱 달러 환전</div>
-          <span class="guide-step-arrow">→</span>
-          <div class="guide-step">📈 미국주식 매수</div>
-          <span class="guide-step-arrow">→</span>
-          <div class="guide-step">💰 배당금 확인</div>
-          <span class="guide-step-arrow">→</span>
-          <div class="guide-step">🔄 재투자 또는 보관</div>
-        </div>
-        <div class="guide-warn">💡 처음에는 큰돈보다 <strong>소액으로 구조를 익히는 것</strong>이 훨씬 좋습니다.</div>
-      </div>
-
-      <!-- 배당주 고를 때 -->
-      <div class="guide-block">
-        <div class="guide-block-title"><span class="g-icon">✅</span> 배당주 고를 때 기준</div>
-        <div class="guide-items">
-          <div class="guide-item"><div class="guide-item-dot"></div>배당을 꾸준히 줬는지 — 연속 배당 이력 확인</div>
-          <div class="guide-item"><div class="guide-item-dot"></div>배당금이 늘어나고 있는지 — 배당 성장률 체크</div>
-          <div class="guide-item"><div class="guide-item-dot"></div>회사 실적이 안정적인지 — 매출·이익 추세 확인</div>
-          <div class="guide-item"><div class="guide-item-dot"></div>주가가 과하게 빠진 건 아닌지 — 이유 있는 하락일 수 있음</div>
-          <div class="guide-item"><div class="guide-item-dot"></div>배당률이 비정상적으로 높지 않은지 — <strong>너무 높으면 오히려 위험 신호</strong></div>
-        </div>
-      </div>
-
-      <!-- 관리 방법 -->
-      <div class="guide-block">
-        <div class="guide-block-title"><span class="g-icon">🗂️</span> 관리 방법 (월 1회 체크)</div>
-        <div class="guide-items">
-          <div class="guide-item"><div class="guide-item-dot"></div>배당금 입금 여부 확인</div>
-          <div class="guide-item"><div class="guide-item-dot"></div>주가 변동 이유 파악</div>
-          <div class="guide-item"><div class="guide-item-dot"></div>회사 실적 · 배당 삭감 여부 확인</div>
-          <div class="guide-item"><div class="guide-item-dot"></div>환율 변화 체크</div>
-          <div class="guide-item"><div class="guide-item-dot"></div>배당금은 바로 쓰기보다 <strong>초반엔 재투자</strong>하면 복리 효과 극대화</div>
-        </div>
-      </div>
-
-      <!-- 초보자 실수 -->
-      <div class="guide-block">
-        <div class="guide-block-title"><span class="g-icon">🚫</span> 초보자가 피해야 할 실수</div>
-        <div class="guide-caution-items">
-          <div class="guide-caution-item">❌ 배당률만 보고 사기</div>
-          <div class="guide-caution-item">❌ 한 종목에 몰빵하기</div>
-          <div class="guide-caution-item">❌ 환율 무시하기</div>
-          <div class="guide-caution-item">❌ 세금 생각 안 하기</div>
-          <div class="guide-caution-item">❌ 단기 수익만 기대하기</div>
-        </div>
-      </div>
-
-      <!-- 한 줄 요약 -->
-      <div class="guide-divider"></div>
-      <div class="guide-summary">
-        <div class="guide-summary-icon">⚡</div>
-        <div class="guide-summary-text">
-          <strong>한 줄 요약:</strong> 계좌 개설 → 환전 → 매수 → 배당 확인 → 재투자 → 관리 순서로 시작하세요.<br>
-          처음엔 소액으로 시작하고, <strong>배당률보다 꾸준함과 안정성</strong>을 먼저 보세요.
-        </div>
-      </div>
-
     </div>
+
+    <div class="guide-block">
+      <div class="guide-block-title">🔍 증권사 고르는 기준</div>
+      <div class="guide-items">
+        <div class="guide-item"><div class="guide-dot"></div>거래 수수료 — 낮을수록 유리</div>
+        <div class="guide-item"><div class="guide-dot"></div>환전 우대율 — 달러 투자라 <strong>환전 수수료도 중요</strong></div>
+        <div class="guide-item"><div class="guide-dot"></div>앱 편의성 · 배당금 확인 기능</div>
+        <div class="guide-item"><div class="guide-dot"></div>소수점 투자 가능 여부 — 초보자에게 특히 유용</div>
+      </div>
+    </div>
+
+    <div class="guide-block">
+      <div class="guide-block-title">📋 투자하는 순서</div>
+      <div class="guide-steps">
+        <div class="guide-step"><div class="step-num">1</div><div class="step-text">원화 입금</div><div class="step-emoji">💵</div></div>
+        <div class="guide-step"><div class="step-num">2</div><div class="step-text">달러 환전</div><div class="step-emoji">💱</div></div>
+        <div class="guide-step"><div class="step-num">3</div><div class="step-text">미국주식 매수</div><div class="step-emoji">📈</div></div>
+        <div class="guide-step"><div class="step-num">4</div><div class="step-text">배당금 확인</div><div class="step-emoji">💰</div></div>
+        <div class="guide-step"><div class="step-num">5</div><div class="step-text">재투자 또는 보관</div><div class="step-emoji">🔄</div></div>
+      </div>
+      <div class="guide-warn">💡 처음에는 큰돈보다 <strong>소액으로 구조를 익히는 것</strong>이 훨씬 좋아요.</div>
+    </div>
+
+    <div class="guide-block">
+      <div class="guide-block-title">✅ 배당주 고를 때 기준</div>
+      <div class="guide-items">
+        <div class="guide-item"><div class="guide-dot"></div>배당을 꾸준히 줬는지 — 연속 배당 이력 확인</div>
+        <div class="guide-item"><div class="guide-dot"></div>배당금이 늘어나고 있는지 — 배당 성장률 체크</div>
+        <div class="guide-item"><div class="guide-dot"></div>회사 실적이 안정적인지 — 매출·이익 추세 확인</div>
+        <div class="guide-item"><div class="guide-dot"></div>주가가 과하게 빠진 건 아닌지 — 이유 있는 하락일 수 있음</div>
+        <div class="guide-item"><div class="guide-dot"></div>배당률이 너무 높지 않은지 — <strong>비정상적으로 높으면 위험 신호</strong></div>
+      </div>
+    </div>
+
+    <div class="guide-block">
+      <div class="guide-block-title">🗂️ 관리 방법 (월 1회 체크)</div>
+      <div class="guide-items">
+        <div class="guide-item"><div class="guide-dot"></div>배당금 입금 여부 확인</div>
+        <div class="guide-item"><div class="guide-dot"></div>주가 변동 이유 파악</div>
+        <div class="guide-item"><div class="guide-dot"></div>회사 실적 · 배당 삭감 여부 확인</div>
+        <div class="guide-item"><div class="guide-dot"></div>환율 변화 체크</div>
+        <div class="guide-item"><div class="guide-dot"></div>배당금은 <strong>초반엔 재투자</strong>하면 복리 효과 극대화</div>
+      </div>
+    </div>
+
+    <div class="guide-block">
+      <div class="guide-block-title">🚫 초보자가 피해야 할 실수</div>
+      <div class="caution-grid">
+        <div class="caution-item">❌ 배당률만 보고 사기</div>
+        <div class="caution-item">❌ 한 종목에 몰빵하기</div>
+        <div class="caution-item">❌ 환율 무시하기</div>
+        <div class="caution-item">❌ 세금 생각 안 하기</div>
+        <div class="caution-item">❌ 단기 수익만 기대하기</div>
+      </div>
+    </div>
+
+    <div class="guide-divider"></div>
+    <div class="guide-summary">
+      <span style="font-size:18px;flex-shrink:0;margin-top:2px;">⚡</span>
+      <div class="guide-summary-text">
+        <strong>한 줄 요약:</strong> 계좌 개설 → 환전 → 매수 → 배당 확인 → 재투자 → 관리<br>
+        처음엔 소액으로 시작하고, <strong>배당률보다 꾸준함과 안정성</strong>을 먼저 보세요.
+      </div>
+    </div>
+    <div style="height:16px;"></div>
   </div>
 
-  <!-- CARDS -->
+  <!-- ═══════════════
+       배당주 TOP 5
+  ═══════════════ -->
+  <div class="section-label">배당주 TOP 5</div>
   <div class="cards">
 
     <!-- 1. KO -->
     <div class="card">
-      <div class="card-rank">
-        <div class="rank-num">01</div>
-        <div class="rank-emoji">🥤</div>
-      </div>
-      <div class="card-body">
-        <div class="card-header">
+      <div class="card-top">
+        <div class="card-top-left">
+          <div class="card-num">01</div>
+          <div class="card-emoji-wrap">🥤</div>
           <div>
             <div class="card-ticker">NYSE · KO</div>
             <div class="card-name">Coca-Cola</div>
           </div>
-          <span class="card-type type-king">배당킹 👑</span>
         </div>
+        <div class="card-badge badge-king">배당킹 👑</div>
+      </div>
+      <div class="card-body">
         <div class="card-desc">전 세계 사람들이 매일 마시는 음료 제국</div>
         <div class="stats-row">
-          <div class="stat">
-            <div class="stat-label">배당 수익률</div>
-            <div class="stat-val">2~3%</div>
-          </div>
-          <div class="stat">
-            <div class="stat-label">연속 인상</div>
-            <div class="stat-val">62년</div>
-          </div>
-          <div class="stat">
-            <div class="stat-label">업종</div>
-            <div class="stat-val neutral">생활소비재</div>
-          </div>
+          <div class="stat"><div class="stat-label">배당 수익률</div><div class="stat-val">2~3%</div></div>
+          <div class="stat"><div class="stat-label">연속 인상</div><div class="stat-val">62년</div></div>
+          <div class="stat"><div class="stat-label">업종</div><div class="stat-val n">생활소비재</div></div>
         </div>
         <div class="bullets">
-          <div class="bullet">배당 62년 연속 인상 — 역사상 최장급 배당킹</div>
+          <div class="bullet">62년 연속 배당 인상 — 역사상 최장급 배당킹</div>
           <div class="bullet">워렌 버핏이 30년 넘게 보유 중</div>
           <div class="bullet">경기와 무관하게 소비가 지속되는 구조</div>
         </div>
-        <div class="insight">💡 <strong>추천 이유:</strong> "망하기 어려운 생활필수 소비재"의 대표. 배당주를 처음 시작하는 분들에게 가장 많이 추천되는 종목 중 하나예요.</div>
+        <div class="insight">💡 <strong>추천 이유:</strong> "망하기 어려운 생활필수 소비재"의 대표. 배당주 처음 시작하는 분들에게 가장 많이 추천되는 종목이에요.</div>
       </div>
     </div>
 
     <!-- 2. CVX -->
     <div class="card">
-      <div class="card-rank">
-        <div class="rank-num">02</div>
-        <div class="rank-emoji">⛽</div>
-      </div>
-      <div class="card-body">
-        <div class="card-header">
+      <div class="card-top">
+        <div class="card-top-left">
+          <div class="card-num">02</div>
+          <div class="card-emoji-wrap">⛽</div>
           <div>
             <div class="card-ticker">NYSE · CVX</div>
             <div class="card-name">Chevron</div>
           </div>
-          <span class="card-type type-champ">배당챔피언</span>
         </div>
+        <div class="card-badge badge-champ">배당챔피언</div>
+      </div>
+      <div class="card-body">
         <div class="card-desc">미국 대표 에너지 메이저 기업</div>
         <div class="stats-row">
-          <div class="stat">
-            <div class="stat-label">배당 수익률</div>
-            <div class="stat-val">~4%</div>
-          </div>
-          <div class="stat">
-            <div class="stat-label">연속 인상</div>
-            <div class="stat-val">37년</div>
-          </div>
-          <div class="stat">
-            <div class="stat-label">업종</div>
-            <div class="stat-val neutral">에너지</div>
-          </div>
+          <div class="stat"><div class="stat-label">배당 수익률</div><div class="stat-val">~4%</div></div>
+          <div class="stat"><div class="stat-label">연속 인상</div><div class="stat-val">37년</div></div>
+          <div class="stat"><div class="stat-label">업종</div><div class="stat-val n">에너지</div></div>
         </div>
         <div class="bullets">
-          <div class="bullet">배당 37년 연속 인상 중</div>
+          <div class="bullet">37년 연속 배당 인상 중</div>
           <div class="bullet">유가 상승 국면에서 강한 실적</div>
           <div class="bullet">워렌 버핏이 최근 추가 매수한 종목</div>
         </div>
-        <div class="insight">💡 <strong>추천 이유:</strong> 배당률이 높아 현금 흐름 만들기에 최적입니다. 포트폴리오에 에너지 섹터 하나쯤은 넣는 게 분산 측면에서도 좋아요.</div>
+        <div class="insight">💡 <strong>추천 이유:</strong> 배당률이 높아 현금 흐름 만들기에 최적. 포트폴리오에 에너지 섹터 하나쯤은 넣는 게 분산 측면에서도 좋아요.</div>
       </div>
     </div>
 
     <!-- 3. PEP -->
     <div class="card">
-      <div class="card-rank">
-        <div class="rank-num">03</div>
-        <div class="rank-emoji">🥤</div>
-      </div>
-      <div class="card-body">
-        <div class="card-header">
+      <div class="card-top">
+        <div class="card-top-left">
+          <div class="card-num">03</div>
+          <div class="card-emoji-wrap">🥤</div>
           <div>
             <div class="card-ticker">NASDAQ · PEP</div>
             <div class="card-name">PepsiCo</div>
           </div>
-          <span class="card-type type-king">배당킹 👑</span>
         </div>
+        <div class="card-badge badge-king">배당킹 👑</div>
+      </div>
+      <div class="card-body">
         <div class="card-desc">음료 + 과자 + 식품까지 아우르는 식음료 공룡</div>
         <div class="stats-row">
-          <div class="stat">
-            <div class="stat-label">배당 수익률</div>
-            <div class="stat-val">3~4%</div>
-          </div>
-          <div class="stat">
-            <div class="stat-label">연속 인상</div>
-            <div class="stat-val">52년</div>
-          </div>
-          <div class="stat">
-            <div class="stat-label">업종</div>
-            <div class="stat-val neutral">식음료</div>
-          </div>
+          <div class="stat"><div class="stat-label">배당 수익률</div><div class="stat-val">3~4%</div></div>
+          <div class="stat"><div class="stat-label">연속 인상</div><div class="stat-val">52년</div></div>
+          <div class="stat"><div class="stat-label">업종</div><div class="stat-val n">식음료</div></div>
         </div>
         <div class="bullets">
-          <div class="bullet">배당 52년 연속 인상 — 배당킹 등극</div>
-          <div class="bullet">펩시, 게토레이, 도리토스, 퀘이커 등 다양한 브랜드 보유</div>
+          <div class="bullet">52년 연속 배당 인상 — 배당킹 등극</div>
+          <div class="bullet">펩시, 게토레이, 도리토스, 퀘이커 등 다양한 브랜드</div>
           <div class="bullet">코카콜라보다 더 다양한 사업 포트폴리오</div>
         </div>
-        <div class="insight">💡 <strong>추천 이유:</strong> "사람들이 계속 먹는 기업"은 생각보다 강합니다. 장기 투자용 안정형 배당주로 전문가들도 즐겨 언급하는 종목이에요.</div>
+        <div class="insight">💡 <strong>추천 이유:</strong> "사람들이 계속 먹는 기업"은 생각보다 강해요. 장기 투자용 안정형 배당주로 전문가들도 즐겨 언급하는 종목입니다.</div>
       </div>
     </div>
 
     <!-- 4. VZ -->
     <div class="card">
-      <div class="card-rank">
-        <div class="rank-num">04</div>
-        <div class="rank-emoji">📱</div>
-      </div>
-      <div class="card-body">
-        <div class="card-header">
+      <div class="card-top">
+        <div class="card-top-left">
+          <div class="card-num">04</div>
+          <div class="card-emoji-wrap">📱</div>
           <div>
             <div class="card-ticker">NYSE · VZ</div>
             <div class="card-name">Verizon</div>
           </div>
-          <span class="card-type type-growth">고배당</span>
         </div>
+        <div class="card-badge badge-high">고배당</div>
+      </div>
+      <div class="card-body">
         <div class="card-desc">미국 1위 통신 기업 — 안정적 월정액 수익 구조</div>
         <div class="stats-row">
-          <div class="stat">
-            <div class="stat-label">배당 수익률</div>
-            <div class="stat-val">5~6%</div>
-          </div>
-          <div class="stat">
-            <div class="stat-label">수요 특성</div>
-            <div class="stat-val neutral">경기 무관</div>
-          </div>
-          <div class="stat">
-            <div class="stat-label">업종</div>
-            <div class="stat-val neutral">통신</div>
-          </div>
+          <div class="stat"><div class="stat-label">배당 수익률</div><div class="stat-val">5~6%</div></div>
+          <div class="stat"><div class="stat-label">수요 특성</div><div class="stat-val n">경기 무관</div></div>
+          <div class="stat"><div class="stat-label">업종</div><div class="stat-val n">통신</div></div>
         </div>
         <div class="bullets">
           <div class="bullet">배당 수익률 5~6% — 리스트 중 최고</div>
           <div class="bullet">통신은 경기와 무관하게 꾸준한 수요 유지</div>
-          <div class="bullet">매월 요금을 받는 구조 → 예측 가능한 현금흐름</div>
+          <div class="bullet">매월 요금 수취 구조 → 예측 가능한 현금흐름</div>
         </div>
         <div class="insight">💡 <strong>추천 이유:</strong> 배당금 자체를 많이 받고 싶은 분께 인기. 성장주는 아니므로 "배당 수입" 중심으로 접근하는 게 포인트예요.</div>
       </div>
@@ -831,69 +565,58 @@
 
     <!-- 5. SCHD -->
     <div class="card">
-      <div class="card-rank">
-        <div class="rank-num">05</div>
-        <div class="rank-emoji">📦</div>
-      </div>
-      <div class="card-body">
-        <div class="card-header">
+      <div class="card-top">
+        <div class="card-top-left">
+          <div class="card-num">05</div>
+          <div class="card-emoji-wrap">📦</div>
           <div>
             <div class="card-ticker">NYSE ARCA · SCHD</div>
             <div class="card-name">Schwab Dividend ETF</div>
           </div>
-          <span class="card-type type-etf">ETF</span>
         </div>
+        <div class="card-badge badge-etf">ETF</div>
+      </div>
+      <div class="card-body">
         <div class="card-desc">미국 대표 배당 ETF — 우량 배당주 100개 자동 분산</div>
         <div class="stats-row">
-          <div class="stat">
-            <div class="stat-label">배당 수익률</div>
-            <div class="stat-val">3~4%</div>
-          </div>
-          <div class="stat">
-            <div class="stat-label">구성 종목</div>
-            <div class="stat-val neutral">100개+</div>
-          </div>
-          <div class="stat">
-            <div class="stat-label">유형</div>
-            <div class="stat-val neutral">분산 ETF</div>
-          </div>
+          <div class="stat"><div class="stat-label">배당 수익률</div><div class="stat-val">3~4%</div></div>
+          <div class="stat"><div class="stat-label">구성 종목</div><div class="stat-val n">100개+</div></div>
+          <div class="stat"><div class="stat-label">유형</div><div class="stat-val n">분산 ETF</div></div>
         </div>
         <div class="bullets">
           <div class="bullet">우량 배당주 100개에 자동 분산 투자</div>
           <div class="bullet">배당 수익률과 배당 성장률 모두 안정적</div>
-          <div class="bullet">개별 종목 분석 없이도 배당 포트폴리오 구성 가능</div>
+          <div class="bullet">개별 종목 분석 없이 배당 포트폴리오 구성 가능</div>
         </div>
-        <div class="insight">💡 <strong>추천 이유:</strong> 초보자라면 개별주보다 ETF가 더 현명한 선택일 수 있어요. "뭘 사야 할지 모르겠다" → SCHD 하나로 해결하는 분들이 정말 많습니다.</div>
+        <div class="insight">💡 <strong>추천 이유:</strong> 초보자라면 개별주보다 ETF가 더 현명한 선택일 수 있어요. "뭘 사야 할지 모르겠다" → SCHD 하나로 해결하는 분들 정말 많습니다.</div>
       </div>
     </div>
 
-  </div><!-- end cards -->
+  </div>
 
-  <!-- FOOTER NOTE -->
+  <!-- 투자 유의사항 -->
   <div class="footer-note">
     <div class="footer-note-title">⚠️ 투자 유의사항</div>
     <div class="footer-items">
-      <div class="footer-item">배당 수익률은 주가 변동에 따라 달라지며, 과거 배당 이력이 미래 배당을 보장하지 않습니다.</div>
-      <div class="footer-item">월 100만원 배당을 받으려면 배당 수익률에 따라 투자 원금 규모가 다릅니다. 수익률 4% 기준 시 약 3억원 내외.</div>
+      <div class="footer-item">배당 수익률은 주가 변동에 따라 달라지며, 과거 이력이 미래 배당을 보장하지 않습니다.</div>
+      <div class="footer-item">월 100만원 배당을 받으려면 원금 규모가 필요합니다. 수익률 4% 기준 약 3억원 내외.</div>
       <div class="footer-item">해외 주식 배당금에는 현지 원천징수세(미국 15%) 및 국내 금융소득 종합과세가 적용될 수 있습니다.</div>
-      <div class="footer-item">본 내용은 투자 권유가 아닌 정보 제공 목적이며, 투자 결정은 본인의 판단과 책임하에 이루어져야 합니다.</div>
+      <div class="footer-item">본 내용은 정보 제공 목적이며, 투자 결정은 본인의 판단과 책임하에 이루어져야 합니다.</div>
     </div>
   </div>
 
   <div class="bottom-rule">DIVIDEND INVESTING GUIDE 2026</div>
 
-  <!-- IG BANNER BOTTOM -->
-  <a href="https://www.instagram.com/startup_tip_" target="_blank" style="text-decoration:none;">
-    <div class="ig-banner ig-banner-bottom">
-      <div class="ig-banner-left">
-        <div class="ig-banner-icon">✨</div>
-        <div class="ig-banner-text">
-          <div class="ig-banner-label">More Tips</div>
-          <div class="ig-banner-title">이런 꿀정보, 매일 올라와요!<br>팔로우하고 놓치지 마세요 🔔</div>
-        </div>
+  <!-- IG 배너 하단 -->
+  <a href="https://www.instagram.com/startup_tip_" target="_blank" class="ig-banner ig-banner-bottom">
+    <div class="ig-left">
+      <div class="ig-icon">✨</div>
+      <div>
+        <div class="ig-label">More Tips</div>
+        <div class="ig-title">이런 꿀정보, 매일 올라와요!<br>팔로우하고 놓치지 마세요 🔔</div>
       </div>
-      <div class="ig-btn"><span class="ig-btn-icon">📸</span> @startup_tip_ 바로가기</div>
     </div>
+    <div class="ig-btn">📸 팔로우</div>
   </a>
 
 </div>
